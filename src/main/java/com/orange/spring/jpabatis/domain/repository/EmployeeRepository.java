@@ -1,6 +1,5 @@
 package com.orange.spring.jpabatis.domain.repository;
 
-import com.orange.spring.jpabatis.domain.dto.EmployeeDTO;
 import com.orange.spring.jpabatis.domain.model.employee.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
