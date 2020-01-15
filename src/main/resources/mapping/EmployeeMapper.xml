@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orange.spring.jpabatis.mapper.EmployeeMapper">
+    <select id="getEmployeeDTO" parameterType="integer" resultType="com.orange.spring.jpabatis.domain.dto.EmployeeDTO">
+        SELECT
+            e.id,
+            e.employee_no,
+            e.employee_name,
+            e.address AS employee_address,
+            c.company_name,
+            c.company_address
+        FROM
+            employee e
+                INNER JOIN company c ON e.company_id = c.id
+        WHERE
+            e.id = #{employeeId}
+    </select>
+</mapper>
