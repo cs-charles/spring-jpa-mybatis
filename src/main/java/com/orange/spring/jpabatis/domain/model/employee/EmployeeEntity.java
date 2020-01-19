@@ -11,7 +11,8 @@ import javax.persistence.*;
  * @Description:
  */
 @Data
-@EqualsAndHashCode(of = {"id"})
+/**需要指定eqals,hashcode，否则Set集合无法准确比较属性值**/
+@EqualsAndHashCode(exclude = {"companyEntity"})
 @ToString(of = {"id","employeeName","employeeNo","address"})
 @Table(name = "`employee`")
 @Entity

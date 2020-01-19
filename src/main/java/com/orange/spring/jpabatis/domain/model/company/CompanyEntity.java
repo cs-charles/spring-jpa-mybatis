@@ -12,8 +12,6 @@ import java.util.Set;
  * @Description:
  */
 @Data
-//需要指定eqals,hashcode，否则Set集合无法准确比较属性值
-@EqualsAndHashCode(of = {"id"})
 //需要重写toString,否则存在循环引用问题
 @ToString(of = {"id","companyName","companyAddress","employeeEntitySet"})
 @Table(name = "`company`")
@@ -29,6 +27,6 @@ public class CompanyEntity {
 
     private String companyAddress;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "companyEntity",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "companyEntity",fetch = FetchType.EAGER)
     private Set<EmployeeEntity> employeeEntitySet;
 }

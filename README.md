@@ -20,7 +20,9 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity,Long>, Cu
 ```
  [http-nio-8000-exec-1] WARN  o.h.e.loading.internal.LoadContexts - HHH000100: Fail-safe cleanup (collections) : org.hibernate.engine.loading.internal.CollectionLoadContext@2203bd6e<rs=com.alibaba.druid.pool.DruidPooledResultSet@668512ae>
 ```
-错误原因是由于Set集合会去比较对象是否相等，由于采用了Lombok，没有自己重写equal和hashcode方法
+错误原因是由于Set集合会去比较对象是否相等，由于采用了Lombok，没有自己重写equal和hashcode方法,所以导致无限的循环。
+解决方案就是在EmployeeEntity对象中排除CompanyEntity对象
+另外，如果EmployeeEntity对象的除id外的其他属性允许相同，就不能采用Set集合，改用List集合。或者自定义equal和hashcode方法
     
 * 对象在OneToMany关系中，对象在ToString时，出现stackOverFlow
 错误原因是由于存在循环引用导致的，重写ToString即可解决。

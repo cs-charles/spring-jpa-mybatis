@@ -55,12 +55,18 @@ public class SpringJpabatisApplicationTests {
         CompanyEntity companyEntity = new CompanyEntity();
         companyEntity.setCompanyName("云影网络");
         Set<EmployeeEntity> set = new HashSet<>();
-        EmployeeEntity employeeEntity = new EmployeeEntity();
-        employeeEntity.setEmployeeNo("23425");
-        employeeEntity.setEmployeeName("刘备");
-        set.add(employeeEntity);
+        EmployeeEntity employeeEntity1 = new EmployeeEntity();
+        employeeEntity1.setEmployeeNo("23425");
+        employeeEntity1.setEmployeeName("刘备");
+        EmployeeEntity employeeEntity2 = new EmployeeEntity();
+        employeeEntity2.setEmployeeNo("234256");
+        employeeEntity2.setEmployeeName("刘备");
+        set.add(employeeEntity1);
+        set.add(employeeEntity2);
         companyEntity.setEmployeeEntitySet(set);
         companyRepository.save(companyEntity);
+        //jpa查询所有
+        List<CompanyEntity> companyEntityList2 = companyRepository.findAll();
 
         //tkMybatis查询
         List<CompanyEntity> list1 = companyMapper.getCompanyList();
