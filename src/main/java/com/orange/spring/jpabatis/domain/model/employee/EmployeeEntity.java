@@ -1,6 +1,6 @@
 package com.orange.spring.jpabatis.domain.model.employee;
 import com.orange.spring.jpabatis.domain.model.company.CompanyEntity;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -11,6 +11,8 @@ import javax.persistence.*;
  * @Description:
  */
 @Data
+@EqualsAndHashCode(of = {"id"})
+@ToString(of = {"id","employeeName","employeeNo","address"})
 @Table(name = "`employee`")
 @Entity
 @EntityListeners(AuditingEntityListener.class)

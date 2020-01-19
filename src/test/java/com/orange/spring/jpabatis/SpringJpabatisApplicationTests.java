@@ -5,6 +5,7 @@ import com.orange.spring.jpabatis.domain.dao.CustomerDO;
 import com.orange.spring.jpabatis.domain.dto.EmployeeDTO;
 import com.orange.spring.jpabatis.domain.model.company.CompanyEntity;
 import com.orange.spring.jpabatis.domain.model.customer.CustomerEntity;
+import com.orange.spring.jpabatis.domain.model.employee.EmployeeEntity;
 import com.orange.spring.jpabatis.domain.repository.CompanyRepository;
 import com.orange.spring.jpabatis.domain.repository.CustomerRepository;
 import com.orange.spring.jpabatis.domain.repository.EmployeeRepository;
@@ -21,8 +22,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @RunWith(SpringRunner.class)
@@ -51,10 +51,16 @@ public class SpringJpabatisApplicationTests {
         //jpa 查询
         Optional<CompanyEntity> optionalCompanyEntity = companyRepository.findFirstByCompanyName("云集网络");
         Assert.assertTrue(optionalCompanyEntity.isPresent());
-        /*//jpa保存
+        //jpa保存
         CompanyEntity companyEntity = new CompanyEntity();
         companyEntity.setCompanyName("云影网络");
-        companyRepository.save(companyEntity);*/
+        Set<EmployeeEntity> set = new HashSet<>();
+        EmployeeEntity employeeEntity = new EmployeeEntity();
+        employeeEntity.setEmployeeNo("23425");
+        employeeEntity.setEmployeeName("刘备");
+        set.add(employeeEntity);
+        companyEntity.setEmployeeEntitySet(set);
+        companyRepository.save(companyEntity);
 
         //tkMybatis查询
         List<CompanyEntity> list1 = companyMapper.getCompanyList();
@@ -62,9 +68,9 @@ public class SpringJpabatisApplicationTests {
         CompanyDO companyDO = companyMapper.selectByPrimaryKey(1L);
         Assert.assertTrue(companyDO != null && companyDO.getCompanyName() != null);
         //tKMybatis保存
-        /*CompanyDO company = new CompanyDO();
+        CompanyDO company = new CompanyDO();
         company.setCompanyName("云荣网络");
-        companyMapper.insert(company);*/
+        companyMapper.insert(company);
 
         //jpa + mybatis查询
         List<CompanyEntity> list2 = companyRepository.getAllCompanyEntity();

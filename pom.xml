@@ -41,6 +41,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
+            <!--依赖不传递-->
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -83,6 +84,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                </configuration>
             </plugin>
         </plugins>
     </build>

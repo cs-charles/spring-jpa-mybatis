@@ -1,6 +1,6 @@
 package com.orange.spring.jpabatis.domain.model.company;
 import com.orange.spring.jpabatis.domain.model.employee.EmployeeEntity;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -12,6 +12,10 @@ import java.util.Set;
  * @Description:
  */
 @Data
+//需要指定eqals,hashcode，否则Set集合无法准确比较属性值
+@EqualsAndHashCode(of = {"id"})
+//需要重写toString,否则存在循环引用问题
+@ToString(of = {"id","companyName","companyAddress","employeeEntitySet"})
 @Table(name = "`company`")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -25,6 +29,6 @@ public class CompanyEntity {
 
     private String companyAddress;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "companyEntity")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "companyEntity",fetch = FetchType.LAZY)
     private Set<EmployeeEntity> employeeEntitySet;
 }
